@@ -1,0 +1,136 @@
+<html>
+
+
+<head>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js﻿"></script>
+        
+
+<style>
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+body {
+  background: #21CDB2;
+}
+
+.wrap {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 8px;
+  }
+}
+
+.parent {
+  position: relative;
+  .sub {
+    transition: all 0.5s ease-in-out;
+  }
+  .thanks {
+    font-size: 13px;
+    transition: all 0.5s ease-in-out;
+    position: absolute;
+    top: -5px;
+    left: 0;
+    opacity: 0;
+  }
+}
+
+.text {
+  font-size: 17px;
+  color: #F5F5F5;
+  font-family: 'Open Sans', sans-serif;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  transition: all 0.5s ease-in-out;
+}
+
+#toggle {
+  display: none;
+}
+
+.button {
+  position: absolute;
+  z-index: 999;
+  width: 28px;
+  height: 28px;
+  background: #F9F9F9;
+  border-radius: 10%;
+  transition: all 0.5s ease-in-out;
+  cursor: pointer;
+  &:before {
+    position: absolute;
+    top: 13px;
+    left: 6px;
+    content: '';
+    width: 16px;
+    height: 2px;
+    background: #21CDB2;
+    transform: rotate(90deg);
+  }
+  &:after {
+    position: absolute;
+    top: 13px;
+    left: 6px;
+    content: '';
+    width: 16px;
+    height: 2px;
+    background: #21CDB2;
+  }
+}
+
+#toggle:checked ~ .nav {
+  opacity: 1;
+  transform: translateY(10%);
+}
+
+#toggle:checked ~ .button {
+  transform: rotate(135deg);
+  box-shadow: 0 0 0 0 transparent;
+  border-radius: 100%;
+}
+
+#toggle:checked ~ .subbed {
+  opacity: 1;
+}
+
+
+</style>
+</head>
+
+
+</body>
+
+<div class="wrap">
+  <div>
+    <input type="checkbox" id="toggle" />
+    <label class="button"  for="toggle" >
+    </label>
+  </div>
+  <div class="parent">
+    <div class="text sub">Subscribe Now </div>
+    <div class="text thanks">Thanks for Subscribing </div>
+  </div>
+</div>
+<script language="JavaScript">
+
+
+$('#toggle').click(function() {
+  if ($(this).is(":checked")) {
+    $(".sub").css("opacity", 0);
+    $(".thanks").css("opacity", 1);
+  } 
+  else if ($(this).is(":not(:checked)")) {
+     $(".sub").css("opacity", 1);
+     $(".thanks").css("opacity", 0);
+  }
+});
+
+
+</script>
+</body>
+</html>

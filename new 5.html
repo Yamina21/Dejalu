@@ -1,0 +1,47 @@
+<?php
+$query=mysqli_query($connect,"SELECT distinct first_name from people " );
+
+// Initiate a counter variable
+$i = 1;
+
+while ($row=mysqli_fetch_array($query))
+{
+?>
+</br> <?php  echo$row["first_name"];   ?>
+
+<form>
+<!-- Append the counter to the ID -->
+<input type="text" id="name<?= $i ?>">
+<br/>
+
+<!-- Send just the current counter to your method -->
+<input type="submit" value="submit"  onclick="return chk('<?= $i ?>')">
+
+</form>
+<!-- Append the counter to the message ID -->
+<p id="msg<?= $i ?>" class="msg1"></p>
+<?php
+    // Increment the counter
+    $i++;
+}
+
+
+function chk(id)
+{
+    // Append the counter id to the ID to get the correct input
+    var name=document.getElementById('name' + id).value;
+    var dataString='name='+ name;
+    $.ajax({
+        type:"post",
+        url: "dataInsert.php",
+        data:dataString,
+        cache:false,
+        success:function(phtml){
+            // Instead of using the class to set the message, use the ID,
+            // otherwise all elements will get the text. Again, append the counter id.
+            $('#msg' + id).html(phtml);
+        }
+
+    });
+    return false;
+}
